@@ -72,12 +72,13 @@ Iter 42 (CCD): obj = -2008.5170453209819, δ = 0.0015646879963359072, t1 = 0.24,
 
 ## What problem is the app solving
 
-We solve the following problem for `S`
+We solve the following problem for `S` (a block-diagonal matrix where the blocks corresponds to groups)
 $$\frac{m+1}{m}\Sigma - S \succeq 0$$
 where $m$ and $\Sigma$ are given. In this app, we define groups via average-linkage hierarchical clustering, choose group-key variables with threshold $c=0.5$, and use the maximum entropy (ME) solver. These parameters give a pretty good balance in terms of speed and power/FDR control. See [our paper](https://arxiv.org/abs/2310.15069) for more details.
 
 ## Compiling the app from scratch
 
+In case you would like to compile the app yourself, first install [PackageCompiler.jl](https://github.com/JuliaLang/PackageCompiler.jl), and within Julia,
 ```julia
 using PackageCompiler
 src = "/Users/biona001/.julia/dev/groupknockoff"
