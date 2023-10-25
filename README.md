@@ -70,8 +70,17 @@ Iter 41 (PCA): obj = -2008.5311682808392, δ = 0.00866690367411388, t1 = 0.24, t
 Iter 42 (CCD): obj = -2008.5170453209819, δ = 0.0015646879963359072, t1 = 0.24, t2 = 0.14, t3 = 0.0
 ```
 
-## Problem the app is solving
+## What problem is the app solving
 
 We solve the following problem for `S`
-$$(m+1)/m*\Sigma - S$$
+$$\frac{m+1}{m}\Sigma - S \succeq 0$$
 where $m$ and $\Sigma$ are given. In this app, we define groups via average-linkage hierarchical clustering, choose group-key variables with threshold $c=0.5$, and use the maximum entropy (ME) solver. These parameters give a pretty good balance in terms of speed and power/FDR control. See [our paper](https://arxiv.org/abs/2310.15069) for more details.
+
+## Compiling the app from scratch
+
+```julia
+using PackageCompiler
+src = "/Users/biona001/.julia/dev/groupknockoff"
+des = "/Users/biona001/.julia/dev/groupknockoff/app"
+@time create_app(src, des, include_lazy_artifacts=true)
+```
