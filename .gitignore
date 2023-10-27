@@ -10,4 +10,5 @@ data/S11.txt
 data/groups.txt
 data/group_reps.txt
 
-app
+app_apple_silicon
+app_linux_x86

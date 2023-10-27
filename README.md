@@ -4,26 +4,31 @@ This is an experimental repository that provides a relocatable "app" for code wr
 
 ## Download
 
-Git clone the repository 
+First, git clone the repository 
 ```
 git clone https://github.com/biona001/groupknockoff
 ```
-
-## Usage
-
-The executable is located in `app/bin/groupknockoff`. Use it via
+Then, unzip the `app_XXX.zip` file where `XXX` matches your operating system (currently only apple silicon and linux x86 is supported)
 ```
-./groupknockoff sigma.txt m
+cd groupknockoff
+unzip app_apple_silicon.zip
+```
+The executable will be located in `app_XXX/bin/groupknockoff`. 
+
+## Usage & example
+
+```
+groupknockoff sigma.txt m
 ```
 where 
 + `sigma.txt` is a plain text file containing the correlation matrix stored in tab-separated format. There should be no header
 + `m`: Number of knockoffs the analyst wishes to generate, which defines the constraits in the optimization problem.
 
-Using the example data under `src`, the expected output should be
+**Example (using data under `src`):** Expected output should be
 ```
 $ pwd
 /Users/biona001/.julia/dev/groupknockoff/data
-$ ../app/bin/groupknockoff sigma.txt 5
+$ ../app_apple_silicon/bin/groupknockoff sigma.txt 5
 203 representatives for 430 variables, 241 optimization variables
 Maxent initial obj = -3976.639913431866
 Iter 1 (PCA): obj = -3272.9160443188894, δ = 0.5307152346716336, t1 = 0.01, t2 = 0.0
@@ -70,6 +75,13 @@ Iter 41 (PCA): obj = -2008.5311682808392, δ = 0.00866690367411388, t1 = 0.24, t
 Iter 42 (CCD): obj = -2008.5170453209819, δ = 0.0015646879963359072, t1 = 0.24, t2 = 0.14, t3 = 0.0
 ```
 
+**Output**
+
++ `S.txt`: The full $p \times p$ matrix `S` satisfying $\frac{m+1}{m}\Sigma - S \succeq 0$ (but it is no longer strictly block-diagonal due to utilization of conditional independence)
++ `S11.txt`: The output of group knockoff optimization applied on the group-key variables. 
++ `groups.txt`: Vector of group membership
++ `group_reps.txt`: Selected representatives (i.e. group-key variables)
+
 ## What problem is the app solving
 
 We solve the following problem for `S` (a block-diagonal matrix where the blocks corresponds to groups)
@@ -82,6 +94,6 @@ In case you would like to compile the app yourself, first install [PackageCompil
 ```julia
 using PackageCompiler
 src = "/Users/biona001/.julia/dev/groupknockoff"
-des = "/Users/biona001/.julia/dev/groupknockoff/app"
+des = "/Users/biona001/.julia/dev/groupknockoff/app_apple_silicon"
 @time create_app(src, des, include_lazy_artifacts=true)
 ```

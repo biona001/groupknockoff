@@ -1,0 +1,10 @@
+name = "groupknockoff"
+uuid = "1857b453-cc5e-4cba-b898-a3e1cf0689ca"
+authors = ["bbchu"]
+version = "0.1.0"
+
+[deps]
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Knockoffs = "878bf26d-0c49-448a-9df5-b057c815d613"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+StaticArrayInterface = "0d7ed370-da01-4f52-bd93-41d350b8b718"
