@@ -85,7 +85,13 @@ Iter 42 (CCD): obj = -2008.5170453209819, δ = 0.0015646879963359072, t1 = 0.24,
 ## What problem is the app solving
 
 We solve the following problem for `S` (a block-diagonal matrix where the blocks corresponds to groups)
-$$\frac{m+1}{m}\Sigma - S \succeq 0$$
+```math
+\max_{\mathbf{S}} \log\det\left(\frac{m+1}{m}\mathbf{\Sigma} - \mathbf{S}\right) + m \log\det(\mathbf{S})     \quad \text{ subject to } 
+    \begin{cases}
+        \frac{m + 1}{m}\mathbf{\Sigma} - \mathbf{S} \succeq 0\\
+        \bS \succeq 0
+    \end{cases}
+```
 where $m$ and $\Sigma$ are given. In this app, we define groups via average-linkage hierarchical clustering, choose group-key variables with threshold $c=0.5$, and use the maximum entropy (ME) solver. These parameters give a pretty good balance in terms of speed and power/FDR control. See [our paper](https://arxiv.org/abs/2310.15069) for more details.
 
 ## Compiling the app from scratch
