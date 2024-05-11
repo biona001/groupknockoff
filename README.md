@@ -89,7 +89,7 @@ We solve the following problem for `S` (a block-diagonal matrix where the blocks
 \max_{\mathbf{S}} \log\det\left(\frac{m+1}{m}\mathbf{\Sigma} - \mathbf{S}\right) + m \log\det(\mathbf{S})     \quad \text{ subject to } 
     \begin{cases}
         \frac{m + 1}{m}\mathbf{\Sigma} - \mathbf{S} \succeq 0\\
-        \bS \succeq 0
+        \mathbf{S} \succeq 0
     \end{cases}
 ```
 where $m$ and $\Sigma$ are given. In this app, we define groups via average-linkage hierarchical clustering, choose group-key variables with threshold $c=0.5$, and use the maximum entropy (ME) solver. These parameters give a pretty good balance in terms of speed and power/FDR control. See [our paper](https://arxiv.org/abs/2310.15069) for more details.
